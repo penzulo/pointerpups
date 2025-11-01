@@ -9,10 +9,6 @@ size_t lenstr(const char *str) {
   size_t len = 0;
   for (; *str; ++str, ++len)
     ;
-  // while (*str != '\0') {
-  //   len++;
-  //   str++;
-  // }
 
   return len;
 }

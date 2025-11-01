@@ -1,5 +1,3 @@
-# === Makefile for cprogramming ===
-
 CC := gcc
 CFLAGS := -Wall -Wextra -Werror -pedantic -g
 SRC_DIR := challenges
