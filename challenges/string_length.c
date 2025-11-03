@@ -15,9 +15,8 @@ size_t lenstr(const char *str) {
 
 void test_lenstr_empty() {
   const char string[] = "";
-  const char *p_string = &string[0];
 
-  const size_t length = lenstr(p_string);
+  const size_t length = lenstr(string);
   assert(length == 0);
   printf("Test 1 passed: Empty string length (expected %d, got %zu)\n", 0,
          length);
@@ -25,9 +24,8 @@ void test_lenstr_empty() {
 
 void test_lenstr_non_empty() {
   const char string[] = "Nepal is beautiful.";
-  const char *p_string = &string[0];
 
-  const size_t length = lenstr(p_string);
+  const size_t length = lenstr(string);
   assert(length == 19);
   printf("Test 2 passed: Non-empty string length (expected, %d, "
          "got %zu)\n",
@@ -36,9 +34,8 @@ void test_lenstr_non_empty() {
 
 void test_lenstr_special_character() {
   const char string[] = "\nbut bhutan is better.\n";
-  const char *p_string = &string[0];
 
-  const size_t length = lenstr(p_string);
+  const size_t length = lenstr(string);
   assert(length == 23);
   printf("Test 2 passed: Non-empty string length (expected, %d, "
          "got %zu)\n",
