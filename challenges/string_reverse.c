@@ -34,9 +34,6 @@ void reverse(char *start_ptr) {
     start_ptr++;
     end_ptr--;
   }
-
-  printf("Start Pointer now points to %c.\n", *start_ptr);
-  printf("End Pointer now points to %c.\n", *end_ptr);
 }
 
 void test_reverse_name() {
@@ -44,8 +41,7 @@ void test_reverse_name() {
   // are not the same! The former creates a string literal and
   // the latter creates a string.
   char name[] = "Bhargav";
-  char *start = &name[0];
-  reverse(start);
+  reverse(name);
 
   printf("Reversed string: %s, Expected: %s\n", name, "vagrahB");
 }
