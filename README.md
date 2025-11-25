@@ -1,6 +1,6 @@
-# PointerPups
+# ClingClang
 
-**PointerPups** is a collection of small, focused C programs and excercises designed to help you learn and master low-level programming the fun way.
+**ClingClang** is a collection of small, focused C programs and excercises designed to help you learn and master low-level programming the fun way.
 
 This is perfect for anyone who has learned the basic syntax of C but wants to build a more practical intuition for its core concepts, especially **pointers**, **memory management**, and **data structures**.
 
@@ -40,7 +40,7 @@ You can run any compiled program directly:
 ```bash
 ./bin/bitwise
 ```
-Or, in the future, launch the upcoming PointerPups TUI to explore them all interactively.
+Or, in the future, launch the upcoming ClingClang TUI to explore them all interactively.
 
 
 ## Testing
