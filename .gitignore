@@ -1,2 +1,6 @@
 bin/
+obj/
+.cache/
+*.o
 roadmap.md
+compile_commands.json

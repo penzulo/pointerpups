@@ -1,35 +1,39 @@
 CC := gcc
-CFLAGS := -Wall -Wextra -Werror -pedantic -g
-SRC_DIR := challenges
+CFLAGS := -Wall -Wextra -Werror -pedantic -g -Iinclude
+
+SRC_DIR := src
+TEST_DIR := tests
+OBJ_DIR := obj
 BIN_DIR := bin
 
-# Collect all .c files in challenges/
-SRCS := $(wildcard $(SRC_DIR)/*.c)
+LIB_SRCS := $(wildcard $(SRC_DIR)/*.c)
+LIB_OBJS := $(patsubst $(SRC_DIR)/%.c, $(OBJ_DIR)/%.o, $(LIB_SRCS))
 
-# Replace .c with corresponding bin/ executables
-BINS := $(patsubst $(SRC_DIR)/%.c, $(BIN_DIR)/%, $(SRCS))
+TEST_SRCS := $(wildcard $(TEST_DIR)/*.c)
+TEST_BINS := $(patsubst $(TEST_DIR)/%.c, $(BIN_DIR)/%, $(TEST_SRCS))
 
-# Default target — build everything
-all: $(BINS)
+# Default: Build all tests
+all: $(TEST_BINS)
 
-# Rule for building each binary
-$(BIN_DIR)/%: $(SRC_DIR)/%.c | $(BIN_DIR)
-	$(CC) $(CFLAGS) $< -o $@
+# --- STEP 1: COMPILE THE LIBRARY OBJECTS ---
+# Rule: Turn src/%.c into obj/%.o
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c | $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
 
-# Ensure bin directory exists
+# --- STEP 2: COMPILE AND LINK THE TESTS ---
+# Rule: Turn tests/%.c into bin/%
+# Note: We depend on $(LIB_OBJS) so the library is compiled first!
+$(BIN_DIR)/%: $(TEST_DIR)/%.c $(LIB_OBJS) | $(BIN_DIR)
+	$(CC) $(CFLAGS) $< $(LIB_OBJS) -o $@
+
+# Create directories if they don't exist
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
+
 $(BIN_DIR):
 	mkdir -p $(BIN_DIR)
 
-# Remove all binaries
 clean:
-	rm -rf $(BIN_DIR)
+	rm -rf $(OBJ_DIR) $(BIN_DIR)
 
-# Rebuild from scratch
-rebuild: clean all
-
-# Just print what would be built
-list:
-	@echo "Source files:" $(SRCS)
-	@echo "Binaries:" $(BINS)
-
-.PHONY: all clean rebuild list
+.PHONY: all clean
